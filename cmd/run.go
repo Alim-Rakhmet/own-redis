@@ -1,7 +1,17 @@
 package cmd
 
-func Run() {
-	// port := parseFlags()
+import (
+	"log"
+	"own-redis/internal/server"
+	"own-redis/internal/store"
+)
 
-	// store := store.NewStore()
+func Run() {
+	port := parseFlags()
+
+	store := store.NewStore()
+
+	if err := server.Start(port, store); err != nil {
+		log.Fatal(err)
+	}
 }
